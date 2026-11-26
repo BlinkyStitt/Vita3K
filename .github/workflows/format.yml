@@ -35,3 +35,8 @@ jobs:
         uses: jidicula/clang-format-action@v4.18.0
         with:
           check-path: ${{ matrix.path }}
+
+# Superseded PR validation must not hold runner capacity.
+concurrency:
+  group: pr-ci-format.yml-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true

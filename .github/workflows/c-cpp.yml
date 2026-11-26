@@ -364,3 +364,8 @@ jobs:
           repository: Vita3K
           name: "Automatic CI builds"
           body: "Corresponding commit: ${{ github.sha }}\nVita3K Build: ${{ env.BUILD_VARIABLE }}"
+
+# Superseded PR validation must not hold runner capacity.
+concurrency:
+  group: pr-ci-c-cpp.yml-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
